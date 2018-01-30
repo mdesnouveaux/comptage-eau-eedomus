@@ -78,7 +78,7 @@ $url .= "&value=$consohebdoprix";
 
 $result = file_get_contents($url);
 
-if (strpos($result, '"success": 1') == false) {
+if (!strpos($result, '"success": 1')) {
     echo "Une erreur est survenue sur l'update hebdo: [" . $result . "]";
 } else {
     echo "update hebdo ok<br/>";
@@ -93,7 +93,7 @@ $url .= "&value=$consomensuelleprix";
 
 $result = file_get_contents($url);
 
-if (strpos($result, '"success": 1') == false) {
+if (!strpos($result, '"success": 1')) {
     echo "Une erreur est survenue sur l'update mensuel: [" . $result . "]";
 } else {
     echo "update mensuel ok<br/>";
@@ -108,7 +108,7 @@ $url .= "&value=$consoannuelleprix";
 
 $result = file_get_contents($url);
 
-if (strpos($result, '"success": 1') == false) {
+if (!strpos($result, '"success": 1')) {
     echo "Une erreur est survenue sur l'update annuel: [" . $result . "]";
 } else {
     echo "update annuel ok<br/>";
@@ -123,7 +123,7 @@ $url .= "&value=$consohebdom3";
 
 $result = file_get_contents($url);
 
-if (strpos($result, '"success": 1') == false) {
+if (!strpos($result, '"success": 1')) {
     echo "Une erreur est survenue sur l'update kwh hebdo: [" . $result . "]";
 } else {
     echo "update m3 hebdo ok<br/>";
@@ -138,7 +138,7 @@ $url .= "&value=$consomensuellem3";
 
 $result = file_get_contents($url);
 
-if (strpos($result, '"success": 1') == false) {
+if (!strpos($result, '"success": 1')) {
     echo "Une erreur est survenue sur l'update kwh mensuel: [" . $result . "]";
 } else {
     echo "update m3 mensuel ok<br/>";
@@ -153,7 +153,7 @@ $url .= "&value=$consoannuellem3";
 
 $result = file_get_contents($url);
 
-if (strpos($result, '"success": 1') == false) {
+if (!strpos($result, '"success": 1')) {
     echo "Une erreur est survenue sur l'update kwh annuel: [" . $result . "]";
 } else {
     echo "update m3 annuel ok<br/>";
@@ -169,7 +169,7 @@ $url .= "&value=$bilan";
 
 $result = file_get_contents($url);
 
-if (strpos($result, '"success": 1') == false) {
+if (!strpos($result, '"success": 1')) {
     echo "Une erreur est survenue sur l'update bilan: [" . $result . "]";
 } else {
     echo "update bilan ok<br/>";
