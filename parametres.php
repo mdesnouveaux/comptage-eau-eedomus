@@ -47,4 +47,18 @@ $periph_rlv_elec=88888;
 $prix_m3=5.39;
 //bilan conso
 $etatbilan=99999;
-?>
+
+//******************************************** API set up*******************************************************
+$protocol = 'http';
+$apiPath = $IPeedomus.'/api';
+$method = 'set';
+$action = 'periph.value';
+$bind = array(
+    'protocol' => $protocol,
+    'url'      => $apiPath,
+    'method'   => $method,
+    'action'   => $action,
+    'user'     => $api_user,
+    'secret'   => $api_secret,
+);
+$apiUrlWithPattern = ':protocol//:url/:method?action=:action&api_user:user&api_secret:secret&periph_id:periphId&value:value';
