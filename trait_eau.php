@@ -10,28 +10,23 @@ include ('parametres.php');
 
 mysql_connect($server, $sqllogin, $sqlpass) OR die('Erreur de connexion à la base');
 mysql_select_db('historique') OR die('Erreur de sélection de la base');  
-    $requete = mysql_query('SELECT SUM(conso) FROM eau WHERE WEEK(date) = WEEK(curdate()) AND YEAR(date) = YEAR(curdate())') OR die('Erreur de la requête MySQL'); 
-	     while($resultat = mysql_fetch_row($requete))  
-     {  
-		$consohebdo = $resultat[0];
-	 }
-	 
-mysql_connect($server, $sqllogin, $sqlpass) OR die('Erreur de connexion à la base'); 
-mysql_select_db('historique') OR die('Erreur de sélection de la base');  
-    $requete = mysql_query('SELECT SUM(conso) FROM eau WHERE MONTH(date) = MONTH(curdate()) AND YEAR(date) = YEAR(curdate())') OR die('Erreur de la requête MySQL'); 
-	     while($resultat = mysql_fetch_row($requete))  
-     {  
-		$consomensuelle = $resultat[0];
-	 }
+$requete = mysql_query('SELECT SUM(conso) FROM eau WHERE WEEK(date) = WEEK(curdate()) AND YEAR(date) = YEAR(curdate())') OR die('Erreur de la requête MySQL');
+while($resultat = mysql_fetch_row($requete))
+ {
+    $consohebdo = $resultat[0];
+ }
 
-mysql_connect($server, $sqllogin, $sqlpass) OR die('Erreur de connexion à la base');
-mysql_select_db('historique') OR die('Erreur de sélection de la base');  
-    $requete = mysql_query('SELECT SUM(conso) FROM eau WHERE YEAR(date) = YEAR(curdate())') OR die('Erreur de la requête MySQL'); 
-	     while($resultat = mysql_fetch_row($requete))  
-     {  
-		$consoannuelle = $resultat[0];
-	 }
-mysql_close();
+$requete = mysql_query('SELECT SUM(conso) FROM eau WHERE MONTH(date) = MONTH(curdate()) AND YEAR(date) = YEAR(curdate())') OR die('Erreur de la requête MySQL');
+     while($resultat = mysql_fetch_row($requete))
+ {
+    $consomensuelle = $resultat[0];
+ }
+
+$requete = mysql_query('SELECT SUM(conso) FROM eau WHERE YEAR(date) = YEAR(curdate())') OR die('Erreur de la requête MySQL');
+     while($resultat = mysql_fetch_row($requete))
+ {
+    $consoannuelle = $resultat[0];
+ }
 
 
 // conversion en m3
@@ -166,24 +161,17 @@ else
 
 
 //-----------------------Import des données de comparaison--------------------------
-mysql_connect($server, $sqllogin, $sqlpass) OR die('Erreur de connexion à la base');
-mysql_select_db('historique') OR die('Erreur de sélection de la base');  
-    $requete = mysql_query('SELECT conso FROM eau ORDER BY id DESC'); 
+$requete = mysql_query('SELECT conso FROM eau ORDER BY id DESC');
 
-	     while($resultat = mysql_fetch_row($requete))  
-     {  
-		$consoj1 = $resultat[0];
-	 }
-
-mysql_close();
-
-mysql_connect($server, $sqllogin, $sqlpass) OR die('Erreur de connexion à la base');
-mysql_select_db('historique') OR die('Erreur de sélection de la base');  
-    $requete = mysql_query('SELECT conso FROM eau ORDER BY id DESC LIMIT 1,1');
-	     while($resultat = mysql_fetch_row($requete))  
-     {  
-		$consoj2 = $resultat[0];
-	 }
+     while($resultat = mysql_fetch_row($requete))
+ {
+    $consoj1 = $resultat[0];
+ }
+$requete = mysql_query('SELECT conso FROM eau ORDER BY id DESC LIMIT 1,1');
+     while($resultat = mysql_fetch_row($requete))
+ {
+    $consoj2 = $resultat[0];
+ }
 
 mysql_close();
 
