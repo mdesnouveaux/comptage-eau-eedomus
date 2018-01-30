@@ -177,5 +177,3 @@ if (!strpos($result, '"success": 1')) {
 echo $consoj1;
 echo $consoj2;
 echo $bilan;
-
-?>
