@@ -69,12 +69,18 @@ if ($annee_jour > $annee_veille) {
 }
 
 
+
 //******************************************** Update conso hebdo***********************************************
-$url = "http://$IPeedomus/api/set?action=periph.value";
-$url .= "&api_user=$api_user";
-$url .= "&api_secret=$api_secret";
-$url .= "&periph_id=$periph_hebdo";
-$url .= "&value=$consohebdoprix";
+$weeklyPriceParam = array_merge($bind, array(
+    'periphId' => $periph_hebdo,
+    'value'    => $consohebdoprix,
+));
+
+$url = str_replace(
+    array_keys($weeklyPriceParam),
+    array_values($weeklyPriceParam),
+    $apiUrlWithPattern
+);
 
 $result = file_get_contents($url);
 
@@ -85,11 +91,16 @@ if (!strpos($result, '"success": 1')) {
 }
 
 //******************************************** Update conso mensuelle***********************************************
-$url = "http://$IPeedomus/api/set?action=periph.value";
-$url .= "&api_user=$api_user";
-$url .= "&api_secret=$api_secret";
-$url .= "&periph_id=$periph_mensuel";
-$url .= "&value=$consomensuelleprix";
+$monthlyPriceParam = array_merge($bind, array(
+    'periphId' => $periph_mensuel,
+    'value'    => $consomensuelleprix,
+));
+
+$url = str_replace(
+    array_keys($monthlyPriceParam),
+    array_values($monthlyPriceParam),
+    $apiUrlWithPattern
+);
 
 $result = file_get_contents($url);
 
@@ -100,11 +111,16 @@ if (!strpos($result, '"success": 1')) {
 }
 
 //******************************************** Update conso annuelle***********************************************
-$url = "http://$IPeedomus/api/set?action=periph.value";
-$url .= "&api_user=$api_user";
-$url .= "&api_secret=$api_secret";
-$url .= "&periph_id=$periph_annuel";
-$url .= "&value=$consoannuelleprix";
+$yearlyPriceParam = array_merge($bind, array(
+    'periphId' => $periph_annuel,
+    'value'    => $consoannuelleprix,
+));
+
+$url = str_replace(
+    array_keys($yearlyPriceParam),
+    array_values($yearlyPriceParam),
+    $apiUrlWithPattern
+);
 
 $result = file_get_contents($url);
 
@@ -115,6 +131,16 @@ if (!strpos($result, '"success": 1')) {
 }
 
 //******************************************** Update conso hebdo m3***********************************************
+$weeklyConsumptionParam = array_merge($bind, array(
+    'periphId' => $periph_hebdom3,
+    'value'    => $consohebdom3,
+));
+
+$url = str_replace(
+    array_keys($weeklyConsumptionParam),
+    array_values($weeklyConsumptionParam),
+    $apiUrlWithPattern
+);
 $url = "http://$IPeedomus/api/set?action=periph.value";
 $url .= "&api_user=$api_user";
 $url .= "&api_secret=$api_secret";
@@ -130,11 +156,16 @@ if (!strpos($result, '"success": 1')) {
 }
 
 //******************************************** Update conso mensuelle m3***********************************************
-$url = "http://$IPeedomus/api/set?action=periph.value";
-$url .= "&api_user=$api_user";
-$url .= "&api_secret=$api_secret";
-$url .= "&periph_id=$periph_mensuelm3";
-$url .= "&value=$consomensuellem3";
+$monthlyConsumptionParam = array_merge($bind, array(
+    'periphId' => $periph_mensuelm3,
+    'value'    => $consomensuellem3,
+));
+
+$url = str_replace(
+    array_keys($monthlyConsumptionParam),
+    array_values($monthlyConsumptionParam),
+    $apiUrlWithPattern
+);
 
 $result = file_get_contents($url);
 
@@ -145,11 +176,16 @@ if (!strpos($result, '"success": 1')) {
 }
 
 //******************************************** Update conso annuelle m3***********************************************
-$url = "http://$IPeedomus/api/set?action=periph.value";
-$url .= "&api_user=$api_user";
-$url .= "&api_secret=$api_secret";
-$url .= "&periph_id=$periph_annuelm3";
-$url .= "&value=$consoannuellem3";
+$yearlyConsumptionParam = array_merge($bind, array(
+    'periphId' => $periph_annuelm3,
+    'value'    => $consoannuellem3,
+));
+
+$url = str_replace(
+    array_keys($yearlyConsumptionParam),
+    array_values($yearlyConsumptionParam),
+    $apiUrlWithPattern
+);
 
 $result = file_get_contents($url);
 
@@ -161,11 +197,16 @@ if (!strpos($result, '"success": 1')) {
 
 
 //******************************************** Update bilan***********************************************
-$url = "http://$IPeedomus/api/set?action=periph.value";
-$url .= "&api_user=$api_user";
-$url .= "&api_secret=$api_secret";
-$url .= "&periph_id=$etatbilan";
-$url .= "&value=$bilan";
+$balanceParam = array_merge($bind, array(
+    'periphId' => $etatbilan,
+    'value'    => $bilan,
+));
+
+$url = str_replace(
+    array_keys($balanceParam),
+    array_values($balanceParam),
+    $apiUrlWithPattern
+);
 
 $result = file_get_contents($url);
 
