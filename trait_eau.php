@@ -10,6 +10,8 @@ include('parametres.php');
 
 mysql_connect($server, $sqllogin, $sqlpass) OR die('Erreur de connexion à la base');
 mysql_select_db('historique') OR die('Erreur de sélection de la base');
+
+//-----------------------Import des données de consommation--------------------------
 $requete = mysql_query('SELECT SUM(conso) FROM eau WHERE WEEK(date) = WEEK(curdate()) AND YEAR(date) = YEAR(curdate())') OR die('Erreur de la requête MySQL');
 while ($resultat = mysql_fetch_row($requete)) {
     $consohebdo = $resultat[0];
@@ -25,6 +27,19 @@ while ($resultat = mysql_fetch_row($requete)) {
     $consoannuelle = $resultat[0];
 }
 
+//-----------------------Import des données de comparaison--------------------------
+$requete = mysql_query('SELECT conso FROM eau ORDER BY id DESC');
+
+while ($resultat = mysql_fetch_row($requete)) {
+    $consoj1 = $resultat[0];
+}
+$requete = mysql_query('SELECT conso FROM eau ORDER BY id DESC LIMIT 1,1');
+while ($resultat = mysql_fetch_row($requete)) {
+    $consoj2 = $resultat[0];
+}
+
+mysql_close();
+
 
 // conversion en m3
 $consohebdom3 = ($consohebdo / 1000);
@@ -35,6 +50,13 @@ $consoannuellem3 = ($consoannuelle / 1000);
 $consohebdoprix = ($consohebdom3 * $prix_m3);
 $consomensuelleprix = ($consomensuellem3 * $prix_m3);
 $consoannuelleprix = ($consoannuellem3 * $prix_m3);
+
+// Bilan
+if ($consoj1 < $consoj2) {
+    $bilan = '1';
+} elseif ($consoj1 > $consoj2) {
+    $bilan = '0';
+}
 
 
 //******************************************** Changement d'année ***********************************************
@@ -135,28 +157,6 @@ if (strpos($result, '"success": 1') == false) {
     echo "Une erreur est survenue sur l'update kwh annuel: [" . $result . "]";
 } else {
     echo "update m3 annuel ok<br/>";
-}
-
-
-//-----------------------Import des données de comparaison--------------------------
-$requete = mysql_query('SELECT conso FROM eau ORDER BY id DESC');
-
-while ($resultat = mysql_fetch_row($requete)) {
-    $consoj1 = $resultat[0];
-}
-$requete = mysql_query('SELECT conso FROM eau ORDER BY id DESC LIMIT 1,1');
-while ($resultat = mysql_fetch_row($requete)) {
-    $consoj2 = $resultat[0];
-}
-
-mysql_close();
-|
-
-
-if ($consoj1 < $consoj2) {
-    $bilan = '1';
-} elseif ($consoj1 > $consoj2) {
-    $bilan = '0';
 }
 
 
